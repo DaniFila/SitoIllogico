@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="col"></div>
-        <div class="col ms-5 me-5">
+        <div class="col ms-5 me-5" th:if="${utente!=null}">
             <h3>Form aggiunta altri per qualcosa con id <span th:text="${qualcosa.a}"></span></h3>
             <form action="/dfg" method="post">
                 <div class="mb-3 pt-3 pb-3">
