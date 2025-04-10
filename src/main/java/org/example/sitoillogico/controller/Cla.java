@@ -73,6 +73,7 @@ public class Cla {
     @GetMapping("/DESTRUCTION")
     public String destruct() {
 
+        adao.deleteAll();
         qdao.deleteAll();
         return "desolazione";
     }
