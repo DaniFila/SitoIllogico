@@ -1,7 +1,9 @@
 package org.example.sitoillogico.controller;
 
 
+import org.example.sitoillogico.model.dao.AltroDao;
 import org.example.sitoillogico.model.dao.QualcosaDao;
+import org.example.sitoillogico.model.entities.Altro;
 import org.example.sitoillogico.model.entities.Qualcosa;
 import org.example.sitoillogico.model.enums.Enumeratore;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class Cla {
 
     @Autowired
     QualcosaDao qdao;
+
+    @Autowired
+    AltroDao adao;
 
     @GetMapping("/qwe")
     public String abc() {
@@ -70,6 +75,27 @@ public class Cla {
 
         qdao.deleteAll();
         return "desolazione";
+    }
+
+    @GetMapping("/dfg")
+    public String dfg(Model m, @RequestParam Long a) {
+
+        Qualcosa qualcosa = qdao.getById(a);
+        List<Altro> altri = qualcosa.getAltri();
+        m.addAttribute("qualcosa",qualcosa);
+        m.addAttribute("altri",altri);
+        return "opq";
+    }
+
+    @PostMapping("/dfg")
+    public String dfgform(@RequestParam String f, @RequestParam Long a) {
+
+        Qualcosa qualcosa = qdao.getById(a);
+        Altro altro = new Altro();
+        altro.setF(f);
+        altro.setQualcosa(qualcosa);
+        adao.save(altro);
+        return "redirect:/dfg?a="+a;
     }
 
 
